@@ -14,6 +14,8 @@ public class Player extends Actor
      */
     public void act()
     {
+        setImage("images/survivor-idle_rifle_0.png");
+        
         MouseInfo mouse = Greenfoot.getMouseInfo();
         move();
         rotation(mouse);
