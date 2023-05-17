@@ -23,24 +23,15 @@ public class Player extends Actor
     
     public void move(){
         if(Greenfoot.isKeyDown("left")||Greenfoot.isKeyDown("a")){
-            if(Greenfoot.isKeyDown("up")||Greenfoot.isKeyDown("w")){
-                setLocation(getX() - 1, getY() - 1);
-            }else if(Greenfoot.isKeyDown("down")||Greenfoot.isKeyDown("s")){
-                setLocation(getX() - 1, getY() + 1);
-            }else{
-                setLocation(getX() - 1, getY());
-            }
-        }else if(Greenfoot.isKeyDown("right")||Greenfoot.isKeyDown("d")){
-            if(Greenfoot.isKeyDown("up")||Greenfoot.isKeyDown("w")){
-                setLocation(getX() + 1, getY() - 1);
-            }else if(Greenfoot.isKeyDown("down")||Greenfoot.isKeyDown("s")){
-                setLocation(getX() + 1, getY() + 1);
-            }else{
-                setLocation(getX() + 1, getY());
-            }
-        }else if(Greenfoot.isKeyDown("up")||Greenfoot.isKeyDown("w")){
+            setLocation(getX() - 1, getY());
+        }
+        if(Greenfoot.isKeyDown("right")||Greenfoot.isKeyDown("d")){
+            setLocation(getX() + 1, getY());
+        }
+        if(Greenfoot.isKeyDown("up")||Greenfoot.isKeyDown("w")){
             setLocation(getX() , getY() - 1);
-        }else if(Greenfoot.isKeyDown("down")||Greenfoot.isKeyDown("s")){
+        }
+        if(Greenfoot.isKeyDown("down")||Greenfoot.isKeyDown("s")){
             setLocation(getX(), getY() + 1);
         }
     }
