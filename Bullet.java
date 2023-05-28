@@ -1,5 +1,4 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
 /**
  * Write a description of class Bullet here.
  * 
@@ -14,6 +13,10 @@ public class Bullet extends Item
      */
     public void act()
     {
-        // Add your action code here.
+        Enemy enemy=(Enemy)getOneIntersectingObject(Enemy.class);
+        move(4);    
+        if(getX()<=10 || getX()>=750 || getY()<=10 || getY()>=550 || enemy!=null){
+            getWorld().removeObject(this);
+        }
     }
 }

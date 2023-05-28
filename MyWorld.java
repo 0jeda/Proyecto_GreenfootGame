@@ -15,7 +15,7 @@ public class MyWorld extends World
      */
     public ImgScroll scroller;
     private Player player;
-    
+
     public MyWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
@@ -24,10 +24,23 @@ public class MyWorld extends World
         setBackground("images/bg_prueba.png");
         player = new Player();
         addObject(player, 300, 200);
+        prepare();
     }
-    
+
     public void act()
     {
         scroller.scroll(getWidth()/2-player.getX(), getHeight()/2-player.getY());    
+    }
+    
+    /**
+     * Prepare the world for the start of the program.
+     * That is: create the initial objects and add them to the world.
+     */
+    private void prepare()
+    {
+        Gun gun = new Gun();
+        addObject(gun,573,205);
+        Enemy enemy = new Enemy();
+        addObject(enemy,581,518);
     }
 }
