@@ -15,7 +15,7 @@ public class Bullet extends Item
     {
         Enemy enemy=(Enemy)getOneIntersectingObject(Enemy.class);
         move(4);    
-        if(getX()<=10 || getX()>=750 || getY()<=10 || getY()>=550 || enemy!=null){
+        if(getX()<=10 || getX()>=750 || getY()<=10 || getY()>=550 ){
             getWorld().removeObject(this);
         }
     }

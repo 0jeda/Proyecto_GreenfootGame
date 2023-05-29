@@ -22,7 +22,7 @@ public class Player extends Actor
         rotation(mouse);
     }
     
-    public void move(){
+    private void move(){
         if(Greenfoot.isKeyDown("left")||Greenfoot.isKeyDown("a")){
             if(Greenfoot.isKeyDown("up")||Greenfoot.isKeyDown("w")){
                 setLocation(getX() - offSet, getY() - offSet);
@@ -46,7 +46,7 @@ public class Player extends Actor
         }
     }
     
-    public void rotation(MouseInfo mouse){
+    private void rotation(MouseInfo mouse){
         if(mouse!=null){
             double dx = mouse.getX() - getX();  
             double dy = mouse.getY() - getY();  
@@ -67,7 +67,7 @@ public class Player extends Actor
         }
     }
     
-    public void takeGun(){
+    private void takeGun(){
         Gun gun=(Gun)getOneIntersectingObject(Gun.class);
         if(gun!=null){
             if(Greenfoot.isKeyDown("space")){
@@ -82,10 +82,11 @@ public class Player extends Actor
         }
     }
     
-    public void shotGun(MouseInfo mouse){
+    private void shotGun(MouseInfo mouse){
         if(mouse!=null){
             Gun gun=(Gun)getOneIntersectingObject(Gun.class);
             if(gun!=null){
+                gun.setRotation((int)getRotation());
                 int shots=mouse.getClickCount();
                 if(0<shots){
                     gun.shot(mouse);
