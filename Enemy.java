@@ -21,7 +21,7 @@ public class Enemy extends Actor
     }
     
     private void identifyAnEnemy(){
-        List<Player> jugadores= getNeighbours(140,true,Player.class);
+        List<Player> jugadores= getNeighbours(350,true,Player.class);
         for(Player jugador:jugadores){
             double dx = jugador.getX() - getX();  
             double dy = jugador.getY() - getY();  
@@ -35,8 +35,8 @@ public class Enemy extends Actor
         if(counterShotGunDeley==0){
             MouseInfo mouse = Greenfoot.getMouseInfo();
             gun.setRotation(getRotation());
-            gun.shotByEnemy();
-            counterShotGunDeley=100;
+            gun.shot("Enemy");
+            counterShotGunDeley=gun.deleyOfGun;
         }
         if(counterShotGunDeley>0){
             counterShotGunDeley--;
@@ -45,7 +45,7 @@ public class Enemy extends Actor
     }
     
     private void generateGun(){
-        gun= new Gun();
+        gun= new shotGun();
         getWorld().addObject(gun,getX(),getY());
         hadGun=true;
     }

@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
 /**
  * Write a description of class Bullet here.
  * 
@@ -7,16 +8,27 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Bullet extends Item
 {
-    /**
-     * Act - do whatever the Bullet wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+    private String shooterType; 
+    
+    public Bullet(String shooterType) {
+        this.shooterType = shooterType;
+    }
+    
     public void act()
     {
-        Enemy enemy=(Enemy)getOneIntersectingObject(Enemy.class);
-        move(4);    
-        if(getX()<=10 || getX()>=750 || getY()<=10 || getY()>=550 ){
-            getWorld().removeObject(this);
+        if("Player"==shooterType){
+            Enemy enemy=(Enemy)getOneIntersectingObject(Enemy.class);
+            move(4);    
+            if(getX()<=10 || getX()>=750 || getY()<=10 || getY()>=550 || enemy!=null){
+                getWorld().removeObject(this);
+            }
+        }
+        if("Enemy"==shooterType){
+            Player player=(Player)getOneIntersectingObject(Player.class);
+            move(4);    
+            if(getX()<=10 || getX()>=750 || getY()<=10 || getY()>=550 || player!=null){
+                getWorld().removeObject(this);
+            }
         }
     }
 }

@@ -32,5 +32,13 @@ public class pruebas extends World
         addObject(gun,259,78);
         Enemy enemy = new Enemy();
         addObject(enemy,420,288);
+        enemy.setLocation(706,129);
+        removeObject(gun);
+        assaultRifle assaultRifle = new assaultRifle();
+        addObject(assaultRifle,131,250);
+        shotGun shotGun = new shotGun();
+        addObject(shotGun,142,376);
+        simpleGun simpleGun = new simpleGun();
+        addObject(simpleGun,132,490);
     }
 }

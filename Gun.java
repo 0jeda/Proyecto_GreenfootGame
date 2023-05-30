@@ -8,8 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Gun extends Item
 {
-    private int ammunition=10;
-    private int deleyOfGun;
+    protected int ammunition;
+    protected int deleyOfGun;
 
     
     public void act()
@@ -17,11 +17,11 @@ public class Gun extends Item
     
     }
     
-    public void shot(MouseInfo mouse){
+    public void shot(String shooterType){
         
-        int shots=mouse.getClickCount();
-        if(0<shots && ammunition>0){
-            Bullet bullet= new Bullet();
+        if(ammunition>0){
+            
+            Bullet bullet= new Bullet(shooterType);
             getWorld().addObject(bullet,getX(),getY());
             bullet.setRotation(getRotation());
             ammunition--;
@@ -29,14 +29,4 @@ public class Gun extends Item
 
     }
     
-    public void shotByEnemy(){
-        
-        if(ammunition>0){
-            Bullet bullet= new Bullet();
-            getWorld().addObject(bullet,getX(),getY());
-            bullet.setRotation(getRotation());
-            ammunition--;
-        }
-
-    }
 }

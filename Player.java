@@ -9,6 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Player extends Actor
 {
     private boolean holdingGun;
+    private Gun currentGun;
     private int offSet=2;
 
     public void act()
@@ -17,7 +18,7 @@ public class Player extends Actor
         
         MouseInfo mouse = Greenfoot.getMouseInfo();
         move();
-        takeGun();
+        takeGun();    
         shotGun(mouse);
         rotation(mouse);
     }
@@ -67,20 +68,24 @@ public class Player extends Actor
         }
     }
     
-    private void takeGun(){
-        Gun gun=(Gun)getOneIntersectingObject(Gun.class);
-        if(gun!=null){
-            if(Greenfoot.isKeyDown("space")){
-                holdingGun=true;
-            }
-        }
-        if(holdingGun==true){   
-            gun.setLocation(getX(),getY());
-            if(Greenfoot.isKeyDown("k") ){
-                holdingGun=false;
-            }
+    private void takeGun() {
+    Gun gun = (Gun) getOneIntersectingObject(Gun.class);
+    if (gun != null) {
+        if (holdingGun == false && Greenfoot.isKeyDown("space")) {
+            holdingGun = true;
+            currentGun = gun; // Almacena la referencia a la pistola actualmente recogida
         }
     }
+
+    if (holdingGun == true) {
+        currentGun.setLocation(getX(), getY());
+        if (Greenfoot.isKeyDown("k")) {
+            holdingGun = false;
+            currentGun = null; // Se desasocia la referencia a la pistola al soltarla
+        }
+    }
+}
+
     
     private void shotGun(MouseInfo mouse){
         if(mouse!=null){
@@ -89,7 +94,7 @@ public class Player extends Actor
                 gun.setRotation((int)getRotation());
                 int shots=mouse.getClickCount();
                 if(0<shots){
-                    gun.shot(mouse);
+                    gun.shot("Player");
                 }
             }
         }
