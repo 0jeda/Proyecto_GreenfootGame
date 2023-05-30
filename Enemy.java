@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-import java.util.List;
+import java.util.*;
 /**
  * Write a description of class Enemy here.
  * 
@@ -8,16 +8,26 @@ import java.util.List;
  */
 public class Enemy extends Actor
 {
-    private boolean hadGun=false;
+    private boolean hadGun;
     private Gun gun;
-    private int counterShotGunDeley=0; 
+    private int counterShotGunDeley; 
+    private boolean life;
+    
+    Enemy(){
+        hadGun=false;
+        counterShotGunDeley=0;
+        life=true;
+    }
     
     public void act()
     {
-        if(hadGun==false){
-            generateGun();
+        if(life==true){
+            if(hadGun==false){
+                generateGun();
+            }
+            identifyAnEnemy();
+            stillAlive();
         }
-        identifyAnEnemy();
     }
     
     private void identifyAnEnemy(){
@@ -45,9 +55,29 @@ public class Enemy extends Actor
     }
     
     private void generateGun(){
-        gun= new shotGun();
+        
+        Random rand = new Random();
+        int randomNumber = rand.nextInt(3); 
+        if (randomNumber == 0) {
+            gun = new shotGun();
+        } else if (randomNumber == 1) {
+            gun = new simpleGun();
+        } else {
+            gun = new assaultRifle();
+        }
         getWorld().addObject(gun,getX(),getY());
         hadGun=true;
+    }
+    
+    private void stillAlive(){
+        Bullet bullet=(Bullet)getOneIntersectingObject(Bullet.class);
+        if(bullet!=null){
+            String shooter = bullet.getShooterType();
+            if (shooter != null && shooter=="Player") {
+                life = false;
+            }
+        }
+        
     }
     
 }
