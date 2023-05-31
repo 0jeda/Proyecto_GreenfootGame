@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class StartButton extends Actor
+public class StartButton extends Button
 {
     /**
      * Act - do whatever the start_button wants to do. This method is called whenever
@@ -14,6 +14,6 @@ public class StartButton extends Actor
      */
     public void act()
     {
-        setImage("images/start.png");
+
     }
 }

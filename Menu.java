@@ -10,36 +10,63 @@ public class Menu extends World
 {
     SelectionArrow arrow = new SelectionArrow();
     private int option=0;
+    private int counter = 60;
+    private StartButton startButton = new StartButton();
+    private ControlsButton controlsButton = new ControlsButton();
+    private ScoresButton scoresButton = new ScoresButton();
+    private EscButton escButton = new EscButton();
     
     public Menu()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1080, 600, 1);
         prepareWorld();
-        setBackground("menu_bg.jpg");
+        setBackground("images/HLMM_BG.png");
     }
     
     public void prepareWorld(){
-        addObject(new StartButton(), 400, 250);
-        addObject(new EscButton(), 400, 350);
-        addObject(arrow, 275, 250);
+        addObject(startButton, 850, 150);
+        addObject(controlsButton, 850, 250);
+        addObject(scoresButton, 850, 350);
+        addObject(escButton, 850, 450);
+        addObject(arrow, 690, 150);
     }
     
     public void act(){
-        if(Greenfoot.isKeyDown("UP") && option!=0){option++;}
-        if(Greenfoot.isKeyDown("DOWN") && option!=1){option--;}
+        counter--;
+        if(Greenfoot.isKeyDown("UP") && counter<=0/*&& option!=0*/){
+            option--;
+            counter=60;
+        }
+        if(Greenfoot.isKeyDown("DOWN") && counter<=0/*&& option!=4*/){
+            option++;
+            counter=60;
+        }
         
-        if(option>=2){option=0;}
-        if(option<0){option=1;}
+        if(option>=4){option=3;}
+        if(option<0){option=0;}
         
-        arrow.setLocation(275, 250 + (option*100));
+        arrow.setLocation(690, 150 + (option*100));
         
         if(Greenfoot.isKeyDown("ENTER")){
             switch(option){
                 case 0:
+                    startButton.setImage("images/iniciarSeleccionPA.png");
+                    Greenfoot.delay(50);
                     Greenfoot.setWorld(new MyWorld());
                     break;
                 case 1:
+                    controlsButton.setImage("images/comoJugarSeleccionPA.png");
+                    Greenfoot.delay(50);
+                    Greenfoot.setWorld(new HowToPlay());
+                    break;
+                case 2:
+                    scoresButton.setImage("images/puntuacionesSeleccionPA.png");
+                    Greenfoot.delay(50);
+                    Greenfoot.setWorld(new Scores());
+                case 3:
+                    escButton.setImage("images/SalirSeleccionPA.png");
+                    Greenfoot.delay(50);
                     Greenfoot.stop();
                     break;
             }

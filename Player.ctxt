@@ -11,4 +11,6 @@ comment4.params=
 comment4.target=void\ takeGun()
 comment5.params=mouse
 comment5.target=void\ shotGun(greenfoot.MouseInfo)
-numComments=6
+comment6.params=
+comment6.target=void\ checkWalls()
+numComments=7

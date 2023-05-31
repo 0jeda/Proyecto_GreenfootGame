@@ -14,13 +14,14 @@ public class Player extends Actor
 
     public void act()
     {
-        setImage("images/survivor-idle_rifle_0.png");
+        setImage("images/player_walk_1_PA.png");
         
         MouseInfo mouse = Greenfoot.getMouseInfo();
         move();
         takeGun();    
         shotGun(mouse);
         rotation(mouse);
+        checkWalls();
     }
     
     private void move(){
@@ -100,5 +101,30 @@ public class Player extends Actor
         }
     }
     
-    
+    public void checkWalls(){
+        Wall wall = (Wall)getOneIntersectingObject(Wall.class);
+        if(wall!=null){
+            if(Greenfoot.isKeyDown("left")||Greenfoot.isKeyDown("a")){
+                if(Greenfoot.isKeyDown("up")||Greenfoot.isKeyDown("w")){
+                    setLocation(getX() + offSet, getY() + offSet);
+                }else if(Greenfoot.isKeyDown("down")||Greenfoot.isKeyDown("s")){
+                    setLocation(getX() + offSet, getY() - offSet);
+                }else{
+                    setLocation(getX() + offSet, getY());
+                }
+            }else if(Greenfoot.isKeyDown("right")||Greenfoot.isKeyDown("d")){
+                if(Greenfoot.isKeyDown("up")||Greenfoot.isKeyDown("w")){
+                    setLocation(getX() - offSet, getY() + offSet);
+                }else if(Greenfoot.isKeyDown("down")||Greenfoot.isKeyDown("s")){
+                    setLocation(getX() - offSet, getY() - offSet);
+                }else{
+                    setLocation(getX() - offSet, getY());
+                }
+            }else if(Greenfoot.isKeyDown("up")||Greenfoot.isKeyDown("w")){
+                setLocation(getX() , getY() + offSet);
+            }else if(Greenfoot.isKeyDown("down")||Greenfoot.isKeyDown("s")){
+                setLocation(getX(), getY() - offSet);
+            }
+        }
+    }
 }
