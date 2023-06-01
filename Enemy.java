@@ -82,6 +82,7 @@ public class Enemy extends Actor
                 life = false;
                 Player player = (Player)getWorld().getObjects(Player.class).get(0);
                 player.increaseScore();
+                setImage("images/enemy_dead_PA.png");
             }
         } 
     }

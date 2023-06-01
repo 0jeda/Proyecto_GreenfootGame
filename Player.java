@@ -16,8 +16,11 @@ public class Player extends Actor
     private int currentEscenario;
     private String escenarioName;
     private int nameDeley;
+    private String []images;
+    private int playerDeley=30;
+    private int playerImageIndex;
 
-    Player(){
+    public Player(){
         holdingGun=false;
         OFFSET=2;
         numOfEscenario=1;
@@ -25,12 +28,18 @@ public class Player extends Actor
         currentEscenario=1;
         escenarioName="hola";
         nameDeley=300;
+        images = new String[7];
+        images[0] = "images/player_walk_1_PA.png";
+        images[1] = "images/player_walk_2_PA.png";
+        images[2] = "images/player_walk_3_PA.png";
+        images[3] = "images/player_walk_4_PA.png";
+        images[4] = "images/player_walk_5_PA.png";
+        images[5] = "images/player_walk_6_PA.png";
+        images[6] = "images/player_walk_7_PA.png";
     }
 
     public void act()
     {
-        setImage("images/player_walk_1_PA.png");
-
         MouseInfo mouse = Greenfoot.getMouseInfo();
         move();
         takeGun();    
@@ -38,7 +47,8 @@ public class Player extends Actor
         rotation(mouse);
         changeEscenario();
         showScore();
-        
+        movementAnimation();
+
         if(nameDeley>0){
             World world = getWorld();
             world.showText(escenarioName, 500,50);
@@ -68,6 +78,7 @@ public class Player extends Actor
         setLocation(getX()+offsetX,getY()+offsetY);
 
     }
+
     public void rotation(MouseInfo mouse){
         if(mouse!=null){
             double dx = mouse.getX() - getX();  
@@ -83,6 +94,7 @@ public class Player extends Actor
             if (!holdingGun && Greenfoot.isKeyDown("space")) {
                 holdingGun = true;
                 currentGun = gun; 
+                gun.getImage().setTransparency(0);
             }
         }
 
@@ -91,6 +103,7 @@ public class Player extends Actor
             if (Greenfoot.isKeyDown("k")) {
                 holdingGun = false;
                 currentGun = null; 
+                gun.getImage().setTransparency(255);
             }
         }
     }
@@ -107,7 +120,7 @@ public class Player extends Actor
 
     public void changeEscenario(){
         DoorWarp exit=(DoorWarp)getOneIntersectingObject(DoorWarp.class);
-       
+
         if(exit!=null){
             currentEscenario++; 
             World newEscenario=null;
@@ -116,15 +129,15 @@ public class Player extends Actor
                     newEscenario = new pruebas2();
                     escenarioName = "cocina";
                     break;
-                /*case 3:
+                    /*case 3:
                     newEscenario = new pruebas3();
                     break;*/
-                
+
                 default:
                     newEscenario = new Scores();
                     break;
             }
-            
+
             Greenfoot.setWorld(newEscenario);
             newEscenario.addObject(this, 50, 200);
             if(currentGun!=null){
@@ -132,17 +145,51 @@ public class Player extends Actor
             }
             nameDeley=300;
         }
-    
+
     }
 
     public void increaseScore() {
         score+=50;
     }
-    
+
     public void showScore(){
         World world = getWorld();
         world.showText("Score: "+score, 200,50);
     }
-    
 
+    public void movementAnimation(){
+        if(holdingGun==false){
+            if(isPressingMovementKeys()){
+                if(playerDeley==0){
+                    playerImageIndex++;
+                    if(playerImageIndex>6){
+                        playerImageIndex=0;
+                    }
+                    setImage(images[playerImageIndex]);
+                    playerDeley=30;
+                }
+                playerDeley--;
+            }else{
+                setImage("images/player_walk_1_PA.png");
+            }
+        }else{
+            shotGun shotgun = (shotGun)getOneIntersectingObject(shotGun.class);
+            assaultRifle rifle = (assaultRifle)getOneIntersectingObject(assaultRifle.class);
+            simpleGun simple = (simpleGun)getOneIntersectingObject(simpleGun.class);
+            if(shotgun != null){
+                setImage("images/player_shotgun_PA.png");
+            }
+            if(rifle != null){
+                setImage("images/player_rifle_PA.png");
+            }
+            if(simple != null){
+                setImage("images/player_gun_PA.png");
+            }
+        }
+    }
+
+    public boolean isPressingMovementKeys(){
+        return Greenfoot.isKeyDown("up")||Greenfoot.isKeyDown("w") || Greenfoot.isKeyDown("left")||Greenfoot.isKeyDown("a")
+        || Greenfoot.isKeyDown("down")||Greenfoot.isKeyDown("s") || Greenfoot.isKeyDown("right")||Greenfoot.isKeyDown("d");
+    }
 }

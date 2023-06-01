@@ -37,6 +37,10 @@ public class shotGun extends Gun
         getWorld().addObject(bulletRight, getX() + 10, getY());
         bulletRight.setRotation(getRotation() + 10);
         ammunition--;
+        
+        shotSound = new GreenfootSound("sounds/shotgunShot.mp3");
+        shotSound.play();
+        shotSound.setVolume(50);
     }
 }
 
