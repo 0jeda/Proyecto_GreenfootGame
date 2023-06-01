@@ -10,7 +10,7 @@ public class simpleGun extends Gun
 {
     simpleGun(){
        ammunition=15;
-       deleyOfGun=1000;     
+       deleyOfGun=100;     
     }
     
     public void act()

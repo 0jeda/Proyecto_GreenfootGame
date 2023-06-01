@@ -20,9 +20,11 @@ public class Player extends Actor
     private String []images;
     private int playerDeley=30;
     private int playerImageIndex;
+    private int ammunition;
 
     public Player(){
         holdingGun=false;
+        ammunition=0;
         OFFSET=2;
         numOfEscenario=1;
         score=0;
@@ -53,10 +55,9 @@ public class Player extends Actor
         rotation(mouse);
         changeEscenario();
         showScore();
-<<<<<<< HEAD
-=======
+        showAmmunition();
         movementAnimation();
->>>>>>> 7c97b69f0e1c730bc6bb82318e6e0e117e29b1e2
+
 
         if(nameDeley>0){
             World world = getWorld();
@@ -102,6 +103,7 @@ public class Player extends Actor
             if (!holdingGun && Greenfoot.isKeyDown("space") && currentMele==null) {
                 holdingGun = true;
                 currentGun = gun; 
+                ammunition=currentGun.getAmmunition();
                 gun.getImage().setTransparency(0);
             }
         }
@@ -134,6 +136,7 @@ public class Player extends Actor
             int shots=mouse.getClickCount();
             if(0<shots){
                 currentGun.shot("Player");
+                ammunition=currentGun.getAmmunition();
             }
         }
     }
@@ -176,7 +179,12 @@ public class Player extends Actor
         World world = getWorld();
         world.showText("Score: "+score, 200,50);
     }
-<<<<<<< HEAD
+    
+    public void showAmmunition(){
+        World world = getWorld();
+        world.showText("Munición: "+ammunition, 80,50);
+    }
+
 
     public void hitEnemy(MouseInfo mouse){
         if(mouse!=null){
@@ -199,8 +207,7 @@ public class Player extends Actor
         }
     }
 
-=======
->>>>>>> 7c97b69f0e1c730bc6bb82318e6e0e117e29b1e2
+
 
     public void movementAnimation(){
         if(holdingGun==false){

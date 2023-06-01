@@ -63,7 +63,7 @@ public class Enemy extends Actor
             MouseInfo mouse = Greenfoot.getMouseInfo();
             gun.setRotation(getRotation());
             gun.shot("Enemy");
-            counterShotGunDeley=gun.getDeleyOfGun();;
+            counterShotGunDeley=gun.getDeleyOfGun();
         }
         if(counterShotGunDeley>0){
             counterShotGunDeley--;
@@ -72,7 +72,6 @@ public class Enemy extends Actor
     }
     
     private void generateGun(){
-        
         Random rand = new Random();
         int randomNumber = rand.nextInt(3); 
         if (randomNumber == 0) {
