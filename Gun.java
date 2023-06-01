@@ -10,7 +10,8 @@ public class Gun extends Item
 {
     protected int ammunition;
     protected int deleyOfGun;
-
+    protected GreenfootSound shotSound;
+    protected String path;
     
     public void act()
     {

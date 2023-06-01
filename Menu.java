@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.GreenfootSound;
 
 /**
  * Write a description of class Menu here.
@@ -15,6 +16,7 @@ public class Menu extends World
     private ControlsButton controlsButton = new ControlsButton();
     private ScoresButton scoresButton = new ScoresButton();
     private EscButton escButton = new EscButton();
+    private GreenfootSound menu_music;
     
     public Menu()
     {    
@@ -22,6 +24,9 @@ public class Menu extends World
         super(1080, 600, 1);
         prepareWorld();
         setBackground("images/HLMM_BG.png");
+        menu_music = new GreenfootSound("sounds/menu.mp3");
+        menu_music.play();
+        menu_music.setVolume(30);
     }
     
     public void prepareWorld(){
@@ -53,15 +58,18 @@ public class Menu extends World
                 case 0:
                     startButton.setImage("images/iniciarSeleccionPA.png");
                     Greenfoot.delay(50);
-                    Greenfoot.setWorld(new MyWorld());
+                    menu_music.pause();
+                    Greenfoot.setWorld(new Scenario1());
                     break;
                 case 1:
                     controlsButton.setImage("images/comoJugarSeleccionPA.png");
+                    menu_music.pause();
                     Greenfoot.delay(50);
                     Greenfoot.setWorld(new HowToPlay());
                     break;
                 case 2:
                     scoresButton.setImage("images/puntuacionesSeleccionPA.png");
+                    menu_music.pause();
                     Greenfoot.delay(50);
                     Greenfoot.setWorld(new Scores());
                 case 3:

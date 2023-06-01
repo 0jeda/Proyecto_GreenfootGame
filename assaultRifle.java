@@ -26,6 +26,9 @@ public class assaultRifle extends Gun
             bullet.setRotation(getRotation());
             ammunition--;
             bullet.move(50-(i*20));
+            shotSound = new GreenfootSound("sounds/assaultShot.mp3");
+            shotSound.play();
+            shotSound.setVolume(50);
             Greenfoot.delay(10); // Pequeño retraso entre cada disparo (ajusta el valor según tus necesidades)
         }
     }
