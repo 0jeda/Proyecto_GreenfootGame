@@ -16,17 +16,17 @@ public class Bullet extends Item
     
     public void act()
     {
-        if("Player"==shooterType){
+        if(shooterType.equals("Player")){
             Enemy enemy=(Enemy)getOneIntersectingObject(Enemy.class);
             move(4);    
-            if(getX()<=10 || getX()>=750 || getY()<=10 || getY()>=550 ){
+            if(getX()<=10 || getX()>=1070 || getY()<=10 || getY()>=590 || enemy!=null ){
                 getWorld().removeObject(this);
             }
         }
-        if("Enemy"==shooterType){
+        if(shooterType.equals("Enemy")){
             Player player=(Player)getOneIntersectingObject(Player.class);
             move(4);    
-            if(getX()<=10 || getX()>=750 || getY()<=10 || getY()>=550 ){
+            if(getX()<=10 || getX()>=1070 || getY()<=10 || getY()>=590 || player!=null ){
                 getWorld().removeObject(this);
             }
         }

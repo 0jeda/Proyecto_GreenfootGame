@@ -14,6 +14,6 @@ public class simpleGun extends Gun
     }
     public void act()
     {
-        
+        rotation();        
     }
 }

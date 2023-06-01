@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.*;
 /**
  * Write a description of class gun here.
  * 
@@ -14,7 +14,7 @@ public class Gun extends Item
     
     public void act()
     {
-    
+        rotation();
     }
     
     public void shot(String shooterType){
@@ -27,6 +27,20 @@ public class Gun extends Item
             ammunition--;
         }
 
+    }
+    
+    public int getDeleyOfGun(){
+        return deleyOfGun;
+    }
+    
+    public void rotation(){
+        List<Player> jugadores= getNeighbours(50,true,Player.class);
+        for(Player jugador:jugadores){
+            double dx = jugador.getX() - getX();  
+            double dy = jugador.getY() - getY();  
+            double angle = Math.atan2(dy,dx)*180.0/(Math.PI);
+            setRotation((int)angle);
+    }
     }
     
 }

@@ -41,5 +41,12 @@ public class pruebas extends World
         addObject(shotGun,142,376);
         simpleGun simpleGun = new simpleGun();
         addObject(simpleGun,132,490);
+        DoorWarp doorWarp = new DoorWarp();
+        addObject(doorWarp,995,296);
+        Enemy enemy2 = new Enemy();
+        addObject(enemy2,799,535);
+        enemy.setLocation(773,89);
     }
+    
+    
 }

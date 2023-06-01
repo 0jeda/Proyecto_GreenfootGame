@@ -12,17 +12,19 @@ public class Enemy extends Actor
     private Gun gun;
     private int counterShotGunDeley; 
     private boolean life;
+    private int radius;
     
     Enemy(){
         hadGun=false;
         counterShotGunDeley=0;
         life=true;
+        radius=0;
     }
     
     public void act()
     {
-        if(life==true){
-            if(hadGun==false){
+        if(life){
+            if(!hadGun){
                 generateGun();
             }
             identifyAnEnemy();
@@ -31,7 +33,7 @@ public class Enemy extends Actor
     }
     
     private void identifyAnEnemy(){
-        List<Player> jugadores= getNeighbours(350,true,Player.class);
+        List<Player> jugadores= getNeighbours(radius,true,Player.class);
         for(Player jugador:jugadores){
             double dx = jugador.getX() - getX();  
             double dy = jugador.getY() - getY();  
@@ -46,7 +48,7 @@ public class Enemy extends Actor
             MouseInfo mouse = Greenfoot.getMouseInfo();
             gun.setRotation(getRotation());
             gun.shot("Enemy");
-            counterShotGunDeley=gun.deleyOfGun;
+            counterShotGunDeley=gun.getDeleyOfGun();;
         }
         if(counterShotGunDeley>0){
             counterShotGunDeley--;
@@ -60,10 +62,13 @@ public class Enemy extends Actor
         int randomNumber = rand.nextInt(3); 
         if (randomNumber == 0) {
             gun = new shotGun();
+            radius=250; 
         } else if (randomNumber == 1) {
             gun = new simpleGun();
+            radius=300;
         } else {
             gun = new assaultRifle();
+            radius=450;
         }
         getWorld().addObject(gun,getX(),getY());
         hadGun=true;
@@ -73,11 +78,12 @@ public class Enemy extends Actor
         Bullet bullet=(Bullet)getOneIntersectingObject(Bullet.class);
         if(bullet!=null){
             String shooter = bullet.getShooterType();
-            if (shooter != null && shooter=="Player") {
+            if (shooter != null && shooter.equals("Player")) {
                 life = false;
+                Player player = (Player)getWorld().getObjects(Player.class).get(0);
+                player.increaseScore();
             }
-        }
-        
+        } 
     }
     
 }

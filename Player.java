@@ -10,121 +10,139 @@ public class Player extends Actor
 {
     private boolean holdingGun;
     private Gun currentGun;
-    private int offSet=2;
+    private int OFFSET;
+    private int numOfEscenario;
+    private int score;
+    private int currentEscenario;
+    private String escenarioName;
+    private int nameDeley;
+
+    Player(){
+        holdingGun=false;
+        OFFSET=2;
+        numOfEscenario=1;
+        score=0;
+        currentEscenario=1;
+        escenarioName="hola";
+        nameDeley=300;
+    }
 
     public void act()
     {
         setImage("images/player_walk_1_PA.png");
-        
+
         MouseInfo mouse = Greenfoot.getMouseInfo();
         move();
         takeGun();    
         shotGun(mouse);
         rotation(mouse);
-        checkWalls();
-    }
-    
-    private void move(){
-        if(Greenfoot.isKeyDown("left")||Greenfoot.isKeyDown("a")){
-            if(Greenfoot.isKeyDown("up")||Greenfoot.isKeyDown("w")){
-                setLocation(getX() - offSet, getY() - offSet);
-            }else if(Greenfoot.isKeyDown("down")||Greenfoot.isKeyDown("s")){
-                setLocation(getX() - offSet, getY() + offSet);
-            }else{
-                setLocation(getX() - offSet, getY());
-            }
-        }else if(Greenfoot.isKeyDown("right")||Greenfoot.isKeyDown("d")){
-            if(Greenfoot.isKeyDown("up")||Greenfoot.isKeyDown("w")){
-                setLocation(getX() + offSet, getY() - offSet);
-            }else if(Greenfoot.isKeyDown("down")||Greenfoot.isKeyDown("s")){
-                setLocation(getX() + offSet, getY() + offSet);
-            }else{
-                setLocation(getX() + offSet, getY());
-            }
-        }else if(Greenfoot.isKeyDown("up")||Greenfoot.isKeyDown("w")){
-            setLocation(getX() , getY() - offSet);
-        }else if(Greenfoot.isKeyDown("down")||Greenfoot.isKeyDown("s")){
-            setLocation(getX(), getY() + offSet);
+        changeEscenario();
+        showScore();
+        
+        if(nameDeley>0){
+            World world = getWorld();
+            world.showText(escenarioName, 500,50);
+            nameDeley--;
+        }else{
+            World world = getWorld();
+            world.showText(" ", 500,50);
         }
     }
-    
-    private void rotation(MouseInfo mouse){
+
+    public void move(){
+        int offsetX=0;
+        int offsetY=0;
+
+        if(Greenfoot.isKeyDown("left")||Greenfoot.isKeyDown("a")){
+            offsetX=-OFFSET;
+        }
+        if(Greenfoot.isKeyDown("right")||Greenfoot.isKeyDown("d")){
+            offsetX=OFFSET;
+        }
+        if(Greenfoot.isKeyDown("up")||Greenfoot.isKeyDown("w")){
+            offsetY=-OFFSET;
+        }
+        if(Greenfoot.isKeyDown("down")||Greenfoot.isKeyDown("s")){
+            offsetY=OFFSET;
+        }
+        setLocation(getX()+offsetX,getY()+offsetY);
+
+    }
+    public void rotation(MouseInfo mouse){
         if(mouse!=null){
             double dx = mouse.getX() - getX();  
             double dy = mouse.getY() - getY();  
             double angle = Math.atan2(dy,dx)*180.0/(Math.PI);
-            if(getX()<mouse.getX()){
-                if(getY() < mouse.getY()){
-                    setRotation((int)angle);
-                }else if(getY()>mouse.getY()){
-                    setRotation((int)angle);
-                }
-            }else if(getX()>mouse.getX()){
-                if(getY()<mouse.getY()){
-                    setRotation((int)angle);
-                }else if(getY()>mouse.getY()){
-                    setRotation((int)angle);
-                }
-            }
-        }
-    }
-    
-    private void takeGun() {
-    Gun gun = (Gun) getOneIntersectingObject(Gun.class);
-    if (gun != null) {
-        if (holdingGun == false && Greenfoot.isKeyDown("space")) {
-            holdingGun = true;
-            currentGun = gun; // Almacena la referencia a la pistola actualmente recogida
+            setRotation((int)angle);
         }
     }
 
-    if (holdingGun == true) {
-        currentGun.setLocation(getX(), getY());
-        if (Greenfoot.isKeyDown("k")) {
-            holdingGun = false;
-            currentGun = null; // Se desasocia la referencia a la pistola al soltarla
+    public void takeGun() {
+        Gun gun = (Gun) getOneIntersectingObject(Gun.class);
+        if (gun != null) {
+            if (!holdingGun && Greenfoot.isKeyDown("space")) {
+                holdingGun = true;
+                currentGun = gun; 
+            }
         }
-    }
-}
 
-    
-    private void shotGun(MouseInfo mouse){
-        if(mouse!=null){
-            Gun gun=(Gun)getOneIntersectingObject(Gun.class);
-            if(gun!=null){
-                gun.setRotation((int)getRotation());
-                int shots=mouse.getClickCount();
-                if(0<shots){
-                    gun.shot("Player");
-                }
+        if (holdingGun == true) {
+            currentGun.setLocation(getX(), getY());
+            if (Greenfoot.isKeyDown("k")) {
+                holdingGun = false;
+                currentGun = null; 
             }
         }
     }
-    
-    public void checkWalls(){
-        Wall wall = (Wall)getOneIntersectingObject(Wall.class);
-        if(wall!=null){
-            if(Greenfoot.isKeyDown("left")||Greenfoot.isKeyDown("a")){
-                if(Greenfoot.isKeyDown("up")||Greenfoot.isKeyDown("w")){
-                    setLocation(getX() + offSet, getY() + offSet);
-                }else if(Greenfoot.isKeyDown("down")||Greenfoot.isKeyDown("s")){
-                    setLocation(getX() + offSet, getY() - offSet);
-                }else{
-                    setLocation(getX() + offSet, getY());
-                }
-            }else if(Greenfoot.isKeyDown("right")||Greenfoot.isKeyDown("d")){
-                if(Greenfoot.isKeyDown("up")||Greenfoot.isKeyDown("w")){
-                    setLocation(getX() - offSet, getY() + offSet);
-                }else if(Greenfoot.isKeyDown("down")||Greenfoot.isKeyDown("s")){
-                    setLocation(getX() - offSet, getY() - offSet);
-                }else{
-                    setLocation(getX() - offSet, getY());
-                }
-            }else if(Greenfoot.isKeyDown("up")||Greenfoot.isKeyDown("w")){
-                setLocation(getX() , getY() + offSet);
-            }else if(Greenfoot.isKeyDown("down")||Greenfoot.isKeyDown("s")){
-                setLocation(getX(), getY() - offSet);
+
+    public void shotGun(MouseInfo mouse){
+        if(mouse!=null && currentGun!=null){
+            currentGun.setRotation((int)getRotation());
+            int shots=mouse.getClickCount();
+            if(0<shots){
+                currentGun.shot("Player");
             }
         }
     }
+
+    public void changeEscenario(){
+        DoorWarp exit=(DoorWarp)getOneIntersectingObject(DoorWarp.class);
+       
+        if(exit!=null){
+            currentEscenario++; 
+            World newEscenario=null;
+            switch (currentEscenario) {
+                case 2:
+                    newEscenario = new pruebas2();
+                    escenarioName = "cocina";
+                    break;
+                /*case 3:
+                    newEscenario = new pruebas3();
+                    break;*/
+                
+                default:
+                    newEscenario = new Scores();
+                    break;
+            }
+            
+            Greenfoot.setWorld(newEscenario);
+            newEscenario.addObject(this, 50, 200);
+            if(currentGun!=null){
+                newEscenario.addObject(this.currentGun, 50, 200);
+            }
+            nameDeley=300;
+        }
+    
+    }
+
+    public void increaseScore() {
+        score+=50;
+    }
+    
+    public void showScore(){
+        World world = getWorld();
+        world.showText("Score: "+score, 200,50);
+    }
+    
+
 }

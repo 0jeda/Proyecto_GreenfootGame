@@ -15,7 +15,7 @@ public class shotGun extends Gun
     
     public void act()
     {
-        // Add your action code here.
+        rotation();
     }
     @Override
     public void shot(String shooterType) {

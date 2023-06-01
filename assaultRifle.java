@@ -14,7 +14,7 @@ public class assaultRifle extends Gun
     }
     public void act()
     {
-        // Add your action code here.
+        rotation();
     }
     
     @Override
