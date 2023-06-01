@@ -13,22 +13,37 @@ public class Enemy extends Actor
     private int counterShotGunDeley; 
     private boolean life;
     private int radius;
+    private int timeStunned;
+    private String status;
     
     Enemy(){
         hadGun=false;
         counterShotGunDeley=0;
-        life=true;
         radius=0;
+        status="Alive";
+        timeStunned=600;
     }
     
     public void act()
     {
-        if(life){
-            if(!hadGun){
-                generateGun();
-            }
+        if(!hadGun){
+            generateGun();
+        }
+            
+        if(status.equals("Alive")){
             identifyAnEnemy();
             stillAlive();
+        }else if(status.equals("Stunned")){
+            if(timeStunned>0){
+                timeStunned--;
+                stillAlive();
+                //setImage(aturdido);
+            }else{
+                status="Alive";
+                timeStunned=900;
+            }
+        }else if(status.equals("Dead")){
+            //No hace nada
         }
     }
     
@@ -76,14 +91,21 @@ public class Enemy extends Actor
     
     private void stillAlive(){
         Bullet bullet=(Bullet)getOneIntersectingObject(Bullet.class);
-        if(bullet!=null){
+        if(status.equals("Alive") && bullet!=null){
             String shooter = bullet.getShooterType();
             if (shooter != null && shooter.equals("Player")) {
-                life = false;
                 Player player = (Player)getWorld().getObjects(Player.class).get(0);
                 player.increaseScore();
             }
         } 
+    }
+    
+    public void setStatus(String status){
+        this.status=status;
+    }
+    
+    public String getStatus(){
+        return status;
     }
     
 }

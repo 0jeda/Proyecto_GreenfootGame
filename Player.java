@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.*;
 /**
  * Write a description of class player here.
  * 
@@ -10,6 +10,7 @@ public class Player extends Actor
 {
     private boolean holdingGun;
     private Gun currentGun;
+    private weaponMele currentMele;
     private int OFFSET;
     private int numOfEscenario;
     private int score;
@@ -33,12 +34,17 @@ public class Player extends Actor
 
         MouseInfo mouse = Greenfoot.getMouseInfo();
         move();
-        takeGun();    
-        shotGun(mouse);
+        takeGun();   
+
+        if(holdingGun){
+            shotGun(mouse);            
+        }else{
+            hitEnemy(mouse);
+        }
         rotation(mouse);
         changeEscenario();
         showScore();
-        
+
         if(nameDeley>0){
             World world = getWorld();
             world.showText(escenarioName, 500,50);
@@ -66,8 +72,8 @@ public class Player extends Actor
             offsetY=OFFSET;
         }
         setLocation(getX()+offsetX,getY()+offsetY);
-
     }
+
     public void rotation(MouseInfo mouse){
         if(mouse!=null){
             double dx = mouse.getX() - getX();  
@@ -80,17 +86,29 @@ public class Player extends Actor
     public void takeGun() {
         Gun gun = (Gun) getOneIntersectingObject(Gun.class);
         if (gun != null) {
-            if (!holdingGun && Greenfoot.isKeyDown("space")) {
+            if (!holdingGun && Greenfoot.isKeyDown("space") && currentMele==null) {
                 holdingGun = true;
                 currentGun = gun; 
             }
         }
-
-        if (holdingGun == true) {
+        if (holdingGun && currentGun!=null) {
             currentGun.setLocation(getX(), getY());
             if (Greenfoot.isKeyDown("k")) {
                 holdingGun = false;
                 currentGun = null; 
+            }
+        }
+
+        weaponMele mele = (weaponMele) getOneIntersectingObject(weaponMele.class);
+        if (mele != null) {
+            if (!holdingGun && Greenfoot.isKeyDown("space")) {
+                currentMele = mele; 
+            }
+        }
+        if (currentMele!=null) {
+            currentMele.setLocation(getX(), getY());
+            if (Greenfoot.isKeyDown("k")) {
+                currentMele = null; 
             }
         }
     }
@@ -107,7 +125,7 @@ public class Player extends Actor
 
     public void changeEscenario(){
         DoorWarp exit=(DoorWarp)getOneIntersectingObject(DoorWarp.class);
-       
+
         if(exit!=null){
             currentEscenario++; 
             World newEscenario=null;
@@ -116,15 +134,15 @@ public class Player extends Actor
                     newEscenario = new pruebas2();
                     escenarioName = "cocina";
                     break;
-                /*case 3:
+                    /*case 3:
                     newEscenario = new pruebas3();
                     break;*/
-                
+
                 default:
                     newEscenario = new Scores();
                     break;
             }
-            
+
             Greenfoot.setWorld(newEscenario);
             newEscenario.addObject(this, 50, 200);
             if(currentGun!=null){
@@ -132,17 +150,38 @@ public class Player extends Actor
             }
             nameDeley=300;
         }
-    
+
     }
 
     public void increaseScore() {
         score+=50;
     }
-    
+
     public void showScore(){
         World world = getWorld();
         world.showText("Score: "+score, 200,50);
     }
-    
+
+    public void hitEnemy(MouseInfo mouse){
+        if(mouse!=null){
+            int hits=mouse.getClickCount();
+            if(0<hits){
+                //setImage(golpeDerecho);
+                //setImage(golpeIzquierdo):
+                if(currentMele==null){
+                    List<Enemy> enemigos= getNeighbours(110,true,Enemy.class);
+                    for(Enemy enemigo:enemigos){
+                        enemigo.setStatus("Stunned");
+                    }
+                }else if(currentMele!=null){
+                    List<Enemy> enemigos= getNeighbours(150,true,Enemy.class);
+                    for(Enemy enemigo:enemigos){
+                        enemigo.setStatus("Dead");
+                    }
+                }
+            }
+        }
+    }
+
 
 }
