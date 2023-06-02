@@ -119,7 +119,7 @@ public class Enemy extends Actor
                 player.increaseScore(100);
                 setImage("images/enemy_dead_PA.png");
             }
-        }else if(status.equals("Stunned") && timeStunned==0){
+        } else if(status.equals("Stunned") && timeStunned==0){
             Player player = (Player)getWorld().getObjects(Player.class).get(0);
             player.increaseScore(50);
         }
