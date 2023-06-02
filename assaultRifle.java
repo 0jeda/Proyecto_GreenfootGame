@@ -8,14 +8,14 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class assaultRifle extends Gun
 {
-    private boolean flag;
+    private boolean flag1;
     private String shooterType;
     private int deleyOfGun;
     private int numberOfShot;
     private int delayBetweenShots;
 
     assaultRifle(){
-        ammunition=100;   
+        ammunition=90;   
         deleyOfGun=150;
         flag=false;
         numberOfShot=3;
@@ -25,20 +25,27 @@ public class assaultRifle extends Gun
 
     public void act()
     {
-        if(numberOfShot > 0 && flag && delayBetweenShots == 0){
+        if(numberOfShot > 0 && flag1 && delayBetweenShots == 0 && ammunition>0){
             generateBullet();
             numberOfShot--;
             delayBetweenShots = 10; 
         }
-        rotation();
         if(delayBetweenShots > 0){
             delayBetweenShots--; 
+        }
+        if(flag && distance>0){
+            move(3);
+            distance-=2;
+            impactWithEnemy();
+        }else{
+            rotation();
+            flag=false;
         }
     }
 
     @Override
     public void shot(String shooterType) {
-        flag = true;
+        flag1 = true;
         this.shooterType = shooterType;
         numberOfShot = 3;
         delayBetweenShots = 10; 
@@ -53,9 +60,12 @@ public class assaultRifle extends Gun
         bullet.setRotation(getRotation());
         ammunition--;
     }
-    
+
+    public void lanza(boolean flag){
+        this.flag=flag;
+        distance=300;
+    }
 
 }
-
 
 

@@ -8,12 +8,14 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class weaponMele extends Item
 {
-    /**
-     * Act - do whatever the weaponMele wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+    protected boolean status;
+    
     public void act()
     {
         
+    }
+    
+    public void setProjectile(boolean flag){
+        status=flag;
     }
 }
