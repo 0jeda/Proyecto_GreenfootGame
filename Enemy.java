@@ -40,7 +40,7 @@ public class Enemy extends Actor
             if(timeStunned>0){
                 timeStunned--;
                 stillAlive();
-                //setImage(aturdido);
+                setImage("images/enemy_walk_6_PA.png");
             }else{
                 status="Alive";
                 timeStunned=900;
@@ -131,8 +131,7 @@ public class Enemy extends Actor
 
     public void hitEnemy(){
 
-        //setImage(golpeDerecho);
-        //setImage(golpeIzquierdo):
+        setImage("images/enemy_melee_PA.png");
         if(typeOfWeapon.equals("Hand")){
             List<Player> jugadores= getNeighbours(110,true,Player.class);
             for(Player jugador:jugadores){
@@ -142,6 +141,7 @@ public class Enemy extends Actor
             List<Player> jugadores= getNeighbours(110,true,Player.class);
             for(Player jugador:jugadores){
                 jugador.setStatus("Dead");
+                setImage("images/enemy_bonk_PA.png");
             }
         }
 

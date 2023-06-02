@@ -65,13 +65,13 @@ public class Player extends Actor
         }else if(status.equals("Stunned")){
             if(timeStunned>0){
                 timeStunned--;
-                //setImage(aturdido);
+                
             }else{
                 status="Alive";
                 timeStunned=900;
             }
         }else if(status.equals("Dead")){
-            //No hace nada
+            setImage("images/player_dead_PA.png");
         }
         if(nameDeley>0){
             World world = getWorld();
@@ -216,8 +216,9 @@ public class Player extends Actor
             int hits=mouse.getClickCount();
             if(0<hits){
                 //setImage(golpeDerecho);
-                //setImage(golpeIzquierdo):
+                //setImage(golpeIzquierdo);
                 if(currentMele==null){
+                    setImage("images/player_punch_PA.png");
                     List<Enemy> enemigos= getNeighbours(110,true,Enemy.class);
                     for(Enemy enemigo:enemigos){
                         enemigo.setStatus("Stunned");

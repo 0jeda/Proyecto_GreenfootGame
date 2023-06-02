@@ -25,12 +25,29 @@ public class Scenario2 extends World
      */
     private void prepare()
     {
-        Enemy enemy = new Enemy();
-        addObject(enemy,796,134);
-        Enemy enemy2 = new Enemy();
-        addObject(enemy2,906,350);
-        Player player = new Player();
-        addObject(player,136,308);
-        player.setLocation(27,553);
+        addObject(new Enemy(),144,320);
+        addObject(new Enemy(),46,57);
+        //addObject(new Player(),27,493);
+        addObject(new simpleGun(),39,331);
+        addObject(new SmallWall(),214,115);
+        addObject(new LargeWall(),215,263);
+        addObject(new LargeWallHorizontal(),117,399);
+        addObject(new SmallWall(),215,320);
+        addObject(new SmallWall(),215,445);
+        DoorWarp doorWarp = new DoorWarp();
+        doorWarp.setRotation(270);
+        addObject(doorWarp,525,10);
+        addObject(new LargeWall(),374,77);
+        addObject(new LargeWall(),374,307);
+        addObject(new SmallWall(),374,572);
+        addObject(new LargeWallHorizontal(),507,176);
+        addObject(new LargeWallHorizontal(),742,176);
+        addObject(new LargeWall(),605,313);
+        addObject(new SmallWall(),604,458);
+        addObject(new MediumWallHorizontal(),917,176);
+        addObject(new MediumWall(),958,483);
+        addObject(new Enemy(),488,301);
+        addObject(new Enemy(),1033,226);
+        addObject(new shotGun(),1043,515);
     }
 }
