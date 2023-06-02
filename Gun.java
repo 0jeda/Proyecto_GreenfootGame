@@ -11,11 +11,16 @@ public class Gun extends Item
     protected int ammunition;
     protected int deleyOfGun;
     protected GreenfootSound shotSound;
-    protected String path;
-
+    protected boolean flag;
+    protected int distance;
+    
     public void act()
     {
-        rotation();
+        if(flag && distance>0){
+            move(2);
+            distance--;
+        }
+        
     }
 
     public void shot(String shooterType){
@@ -46,5 +51,21 @@ public class Gun extends Item
     
     public int getAmmunition(){
         return ammunition;
+    }
+    
+    public boolean getStatus(){
+        return flag;
+    }
+    
+    public void lanza(boolean flag){
+        this.flag=flag;
+        distance=100;
+    }
+    
+    public void impactWithEnemy(){
+        Enemy enemy=(Enemy)getOneIntersectingObject(Enemy.class);
+        if(enemy!=null){
+            enemy.setStatus("Stunned");
+        }
     }
 }

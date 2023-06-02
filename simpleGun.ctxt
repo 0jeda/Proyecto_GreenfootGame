@@ -7,4 +7,6 @@ comment2.params=
 comment2.target=void\ act()
 comment3.params=shooterType
 comment3.target=void\ shot(java.lang.String)
-numComments=4
+comment4.params=flag
+comment4.target=void\ lanza(boolean)
+numComments=5

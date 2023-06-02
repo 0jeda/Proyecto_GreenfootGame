@@ -338,6 +338,7 @@ dependency89.type=UsesDependency
 dependency9.from=Scenario9
 dependency9.to=LargeWall
 dependency9.type=UsesDependency
+<<<<<<< HEAD
 dependency90.from=Bullet
 dependency90.to=Enemy
 dependency90.type=UsesDependency
@@ -368,6 +369,8 @@ dependency98.type=UsesDependency
 dependency99.from=Enemy
 dependency99.to=Player
 dependency99.type=UsesDependency
+=======
+>>>>>>> b7e92c62403e6a2df446bf6ffbc14ceec1e01278
 editor.fx.0.height=739
 editor.fx.0.width=816
 editor.fx.0.x=100

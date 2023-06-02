@@ -45,7 +45,7 @@ public class Player extends Actor
     {
         MouseInfo mouse = Greenfoot.getMouseInfo();
         move();
-        takeGun();   
+        takeGun(mouse);   
 
         if(holdingGun){
             shotGun(mouse);            
@@ -57,7 +57,6 @@ public class Player extends Actor
         showScore();
         showAmmunition();
         movementAnimation();
-
 
         if(nameDeley>0){
             World world = getWorld();
@@ -97,7 +96,7 @@ public class Player extends Actor
         }
     }
 
-    public void takeGun() {
+    public void takeGun(MouseInfo mouse) {
         Gun gun = (Gun) getOneIntersectingObject(Gun.class);
         if (gun != null) {
             if (!holdingGun && Greenfoot.isKeyDown("space") && currentMele==null) {
@@ -109,10 +108,22 @@ public class Player extends Actor
         }
         if (holdingGun && currentGun!=null) {
             currentGun.setLocation(getX(), getY());
-            if (Greenfoot.isKeyDown("k")) {
-                holdingGun = false;
-                currentGun = null; 
-                gun.getImage().setTransparency(255);
+            if (Greenfoot.isKeyDown("k") && mouse!=null) {
+                if(currentGun.getAmmunition()==0){
+                    holdingGun = false;
+                    double dx = mouse.getX() - currentGun.getX();  
+                    double dy = mouse.getY() - currentGun.getY();  
+                    double angle = Math.atan2(dy,dx)*180.0/(Math.PI);
+                    currentGun.setRotation((int)angle);
+                    currentGun.lanza(true);
+                    currentGun = null; 
+                    gun.getImage().setTransparency(255);
+                }else{
+                    holdingGun = false;
+                    currentGun = null; 
+                    gun.getImage().setTransparency(255);    
+                }
+
             }
         }
 
@@ -179,12 +190,11 @@ public class Player extends Actor
         World world = getWorld();
         world.showText("Score: "+score, 200,50);
     }
-    
+
     public void showAmmunition(){
         World world = getWorld();
         world.showText("Munición: "+ammunition, 80,50);
     }
-
 
     public void hitEnemy(MouseInfo mouse){
         if(mouse!=null){
@@ -206,7 +216,6 @@ public class Player extends Actor
             }
         }
     }
-
 
 
     public void movementAnimation(){

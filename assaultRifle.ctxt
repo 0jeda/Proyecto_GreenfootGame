@@ -9,4 +9,6 @@ comment3.params=shooterType
 comment3.target=void\ shot(java.lang.String)
 comment4.params=
 comment4.target=void\ generateBullet()
-numComments=5
+comment5.params=flag
+comment5.target=void\ lanza(boolean)
+numComments=6

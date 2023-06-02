@@ -15,7 +15,15 @@ public class simpleGun extends Gun
     
     public void act()
     {
-        rotation();        
+        if(flag && distance>0){
+            move(4);
+            distance-=2;
+            impactWithEnemy();
+        }else{
+            rotation();
+            flag=false;
+        }
+          
     }
     
     @Override
@@ -32,5 +40,10 @@ public class simpleGun extends Gun
             shotSound.play();
             shotSound.setVolume(50);
         }
+    }
+    
+    public void lanza(boolean flag){
+        this.flag=flag;
+        distance=200;
     }
 }
