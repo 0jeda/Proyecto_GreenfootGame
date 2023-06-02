@@ -4,3 +4,6 @@ Dany 150
 Carlos 50
 Danyx2 100
 fail 0
+fail 0
+fail 0
+Danyx3 150
