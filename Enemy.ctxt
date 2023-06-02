@@ -17,4 +17,6 @@ comment7.params=status
 comment7.target=void\ setStatus(java.lang.String)
 comment8.params=
 comment8.target=java.lang.String\ getStatus()
-numComments=9
+comment9.params=
+comment9.target=void\ hitEnemy()
+numComments=10

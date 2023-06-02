@@ -30,8 +30,12 @@ public class Bullet extends Item
         if(shooterType.equals("Enemy")){
             Player player=(Player)getOneIntersectingObject(Player.class);
             move(4);    
-            if(getX()<=10 || getX()>=1070 || getY()<=10 || getY()>=590 || player!=null ){
+            if(getX()<=10 || getX()>=1070 || getY()<=10 || getY()>=590){
                 getWorld().removeObject(this);
+            }
+            if(player!=null && player.getStatus().equals("Alive")){
+                getWorld().removeObject(this);
+                player.setStatus("Dead");
             }
         }
         getShooterType();

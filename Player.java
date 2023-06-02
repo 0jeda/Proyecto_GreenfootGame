@@ -21,8 +21,12 @@ public class Player extends Actor
     private int playerDeley=30;
     private int playerImageIndex;
     private int ammunition;
+    private String status;
+    private int timeStunned;
 
     public Player(){
+        timeStunned=900;
+        status="Alive";
         holdingGun=false;
         ammunition=0;
         OFFSET=2;
@@ -42,22 +46,33 @@ public class Player extends Actor
     }
 
     public void act()
-    {
-        MouseInfo mouse = Greenfoot.getMouseInfo();
-        move();
-        takeGun(mouse);   
+    {   
+        if(status.equals("Alive")){
+            MouseInfo mouse = Greenfoot.getMouseInfo();
+            move();
+            takeGun(mouse);   
 
-        if(holdingGun){
-            shotGun(mouse);            
-        }else{
-            hitEnemy(mouse);
+            if(holdingGun){
+                shotGun(mouse);            
+            }else{
+                hitEnemy(mouse);
+            }
+            rotation(mouse);
+            changeEscenario();
+            showScore();
+            showAmmunition();
+            movementAnimation();
+        }else if(status.equals("Stunned")){
+            if(timeStunned>0){
+                timeStunned--;
+                //setImage(aturdido);
+            }else{
+                status="Alive";
+                timeStunned=900;
+            }
+        }else if(status.equals("Dead")){
+            //No hace nada
         }
-        rotation(mouse);
-        changeEscenario();
-        showScore();
-        showAmmunition();
-        movementAnimation();
-
         if(nameDeley>0){
             World world = getWorld();
             world.showText(escenarioName, 500,50);
@@ -217,6 +232,13 @@ public class Player extends Actor
         }
     }
 
+    public void setStatus(String status){
+        this.status=status;
+    }
+
+    public String getStatus(){
+        return status;
+    }
 
     public void movementAnimation(){
         if(holdingGun==false){
