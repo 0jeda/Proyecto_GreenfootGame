@@ -72,6 +72,7 @@ public class Menu extends World
                     menu_music.pause();
                     Greenfoot.delay(50);
                     Greenfoot.setWorld(new Scores());
+                    break;
                 case 3:
                     escButton.setImage("images/SalirSeleccionPA.png");
                     Greenfoot.delay(50);

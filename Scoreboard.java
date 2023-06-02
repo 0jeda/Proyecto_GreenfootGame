@@ -36,7 +36,7 @@ public class Scoreboard extends Actor
         for (int i = 0; i < topScores.size(); i++) {
             Score score = topScores.get(i);
             String text = (i + 1) + ". " + score.getPlayerName() + ": " + score.getScore();
-            image.drawString(text, 10, 20 * (i + 1));
+            image.drawString(text, 80, 20 * (i + 1));
         }
         
         setImage(image);

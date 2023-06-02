@@ -2,3 +2,5 @@ hola 50
 aloh 50
 Dany 150
 Carlos 50
+Danyx2 100
+fail 0

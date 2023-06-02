@@ -63,5 +63,8 @@ public class Scenario8 extends World
         addObject(enemy3,663,499);
         Enemy enemy4 = new Enemy();
         addObject(enemy4,873,164);
+        shotGun shotGun = new shotGun();
+        addObject(shotGun,158,495);
+        shotGun.setLocation(206,479);
     }
 }

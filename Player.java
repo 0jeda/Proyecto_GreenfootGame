@@ -188,19 +188,72 @@ public class Player extends Actor
                     nextX=56;
                     nextY=getY()-10;
                     break;
-                    /*case 3:
-                    newEscenario = new pruebas3();
-                    break;*/
-
+                    
+                case 3:
+                    newEscenario = new Scenario3();
+                    escenarioName = "Nivel 1 Sala 3";
+                    nextX=getX();
+                    nextY=571;
+                    break;
+                
+                case 4:
+                    newEscenario = new Scenario4();
+                    escenarioName = "Nivel 1 Sala 4";
+                    nextX=1041;
+                    nextY=getY();
+                    break;
+                
+                case 5:
+                    newEscenario = new Scenario5();
+                    escenarioName = "Nivel 2 Sala 1";
+                    nextX=139;
+                    nextY=552;
+                    break;
+                
+                case 6:
+                    newEscenario = new Scenario6();
+                    escenarioName = "Nivel 2 Sala 2";
+                    nextX=52;
+                    nextY=getY();
+                    break;
+                    
+                case 7:
+                    newEscenario = new Scenario7();
+                    escenarioName = "Nivel 2 Sala 3";
+                    nextX=52;
+                    nextY=getY();
+                    break;
+                
+                case 8:
+                    newEscenario = new Scenario8();
+                    escenarioName = "Nivel 3 Sala 1";
+                    nextX=131;
+                    nextY=473;
+                    break;
+                    
+                case 9:
+                    newEscenario = new Scenario9();
+                    escenarioName = "Nivel 3 Sala 2";
+                    nextX=40;
+                    nextY=getY();
+                    break;
+                    
+                case 10:
+                    newEscenario = new Scenario10();
+                    escenarioName = "Nivel 3 Sala 3";
+                    nextX=50;
+                    nextY=getY();
+                    break;
+                  
                 default:
-                    newEscenario = new Scores();
+                    newEscenario = new Victory();
                     break;
             }
 
             Greenfoot.setWorld(newEscenario);
             newEscenario.addObject(this, nextX, nextY);
             if(currentGun!=null){
-                newEscenario.addObject(this.currentGun, 500, 100);
+                newEscenario.addObject(this.currentGun, nextX, nextY);
             }
             nameDeley=300;
         }
