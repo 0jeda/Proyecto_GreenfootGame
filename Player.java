@@ -260,8 +260,8 @@ public class Player extends Actor
 
     }
 
-    public void increaseScore() {
-        score+=50;
+    public void increaseScore(int puntos) {
+        score+=puntos;
     }
 
     public void showScore(){

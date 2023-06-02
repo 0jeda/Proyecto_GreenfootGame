@@ -116,10 +116,13 @@ public class Enemy extends Actor
             String shooter = bullet.getShooterType();
             if (shooter != null && shooter.equals("Player")) {
                 Player player = (Player)getWorld().getObjects(Player.class).get(0);
-                player.increaseScore();
+                player.increaseScore(100);
                 setImage("images/enemy_dead_PA.png");
             }
-        } 
+        }else if(status.equals("Stunned") && timeStunned==0){
+            Player player = (Player)getWorld().getObjects(Player.class).get(0);
+            player.increaseScore(50);
+        }
     }
 
     public void setStatus(String status){
