@@ -126,7 +126,7 @@ public class Player extends Actor
             World newEscenario=null;
             switch (currentEscenario) {
                 case 2:
-                    newEscenario = new pruebas2();
+                    newEscenario = new Scenario2();
                     escenarioName = "cocina";
                     break;
                     /*case 3:
@@ -139,9 +139,9 @@ public class Player extends Actor
             }
 
             Greenfoot.setWorld(newEscenario);
-            newEscenario.addObject(this, 50, 200);
+            newEscenario.addObject(this, 50, 493);
             if(currentGun!=null){
-                newEscenario.addObject(this.currentGun, 50, 200);
+                newEscenario.addObject(this.currentGun, 50, 493);
             }
             nameDeley=300;
         }
