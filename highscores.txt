@@ -1,0 +1,4 @@
+hola 50
+aloh 50
+Dany 150
+Carlos 50

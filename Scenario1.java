@@ -31,19 +31,20 @@ public class Scenario1 extends World
      */
     private void prepare()
     {
-        addObject(new shotGun(),122,285);
+        addObject(new shotGun(),211,489);
         addObject(new Enemy(), 680, 108);
-        addObject(new Enemy(), 442, 96);
+        addObject(new Enemy(), 75, 131);
         addObject(new Enemy(), 908, 521);
         addObject(new Player(), 111, 478);
         addObject(new DoorWarp(), 1070, 493);
         addObject(new LargeWallHorizontal(), 114, 361);
         addObject(new MediumWallHorizontal(), 254, 361);
-        addObject(new SmallWall(), 297, 406);
-        addObject(new SmallWall(), 297, 569);
+        addObject(new SmallWall(), 297, 363);
+        addObject(new SmallWall(), 297, 587);
         addObject(new LargeWall(), 586, 118);
         addObject(new LargeWallHorizontal(), 722, 216);
         addObject(new MediumWallHorizontal(), 896, 216);
         addObject(new LargeWall(), 669, 483);
+
     }
 }

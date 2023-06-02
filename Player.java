@@ -23,6 +23,8 @@ public class Player extends Actor
     private int ammunition;
     private String status;
     private int timeStunned;
+    private String playerName="";
+    private Highscores highscores = new Highscores();
 
     public Player(){
         timeStunned=900;
@@ -33,7 +35,7 @@ public class Player extends Actor
         numOfEscenario=1;
         score=0;
         currentEscenario=1;
-        escenarioName="hola";
+        escenarioName="Nivel 1 Sala 1";
         nameDeley=300;
         images = new String[7];
         images[0] = "images/player_walk_1_PA.png";
@@ -62,16 +64,21 @@ public class Player extends Actor
             showScore();
             showAmmunition();
             movementAnimation();
+            checkWalls();
         }else if(status.equals("Stunned")){
             if(timeStunned>0){
                 timeStunned--;
-                
+
             }else{
                 status="Alive";
                 timeStunned=900;
             }
         }else if(status.equals("Dead")){
             setImage("images/player_dead_PA.png");
+            Greenfoot.delay(50);
+            playerName=Greenfoot.ask("Ingresa tu nombre:");
+            highscores.saveHighScore(playerName, score);
+            Greenfoot.setWorld(new GameOver());
         }
         if(nameDeley>0){
             World world = getWorld();
@@ -169,14 +176,17 @@ public class Player extends Actor
 
     public void changeEscenario(){
         DoorWarp exit=(DoorWarp)getOneIntersectingObject(DoorWarp.class);
-
+        int nextX=100;
+        int nextY=100;
         if(exit!=null){
             currentEscenario++; 
             World newEscenario=null;
             switch (currentEscenario) {
                 case 2:
-                    newEscenario = new pruebas2();
-                    escenarioName = "cocina";
+                    newEscenario = new Scenario2();
+                    escenarioName = "Nivel 1 Sala 2";
+                    nextX=56;
+                    nextY=getY()-10;
                     break;
                     /*case 3:
                     newEscenario = new pruebas3();
@@ -188,9 +198,9 @@ public class Player extends Actor
             }
 
             Greenfoot.setWorld(newEscenario);
-            newEscenario.addObject(this, 50, 200);
+            newEscenario.addObject(this, nextX, nextY);
             if(currentGun!=null){
-                newEscenario.addObject(this.currentGun, 50, 200);
+                newEscenario.addObject(this.currentGun, 500, 100);
             }
             nameDeley=300;
         }
@@ -275,5 +285,28 @@ public class Player extends Actor
     public boolean isPressingMovementKeys(){
         return Greenfoot.isKeyDown("up")||Greenfoot.isKeyDown("w") || Greenfoot.isKeyDown("left")||Greenfoot.isKeyDown("a")
         || Greenfoot.isKeyDown("down")||Greenfoot.isKeyDown("s") || Greenfoot.isKeyDown("right")||Greenfoot.isKeyDown("d");
+    }
+
+    public void checkWalls(){
+        Wall wall = (Wall)getOneIntersectingObject(Wall.class);
+        int offsetX=0;
+        int offsetY=0;
+        if(wall!=null){
+            if(Greenfoot.isKeyDown("left")||Greenfoot.isKeyDown("a")){
+                offsetX=OFFSET;
+            }
+            if(Greenfoot.isKeyDown("right")||Greenfoot.isKeyDown("d")){
+                offsetX=-OFFSET;
+            }
+            if(Greenfoot.isKeyDown("up")||Greenfoot.isKeyDown("w")){
+                offsetY=OFFSET;
+            }
+            if(Greenfoot.isKeyDown("down")||Greenfoot.isKeyDown("s")){
+                offsetY=-OFFSET;
+            }
+            setLocation(getX()+offsetX,getY()+offsetY); 
+        }
+
+        
     }
 }

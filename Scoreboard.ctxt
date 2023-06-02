@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=Scoreboard
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Scoreboard\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=highscores\ topScores
+comment1.target=Scoreboard(Highscores,\ java.util.List)
+comment2.params=
+comment2.target=void\ act()
+comment3.params=topScores
+comment3.target=void\ showTopScores(java.util.List)
+numComments=4

@@ -32,7 +32,7 @@ public class Enemy extends Actor
         if(!hadGun){
             generateGun();
         }
-
+        //checkWalls();
         if(status.equals("Alive")){
             identifyAnEnemy();
             stillAlive();
@@ -56,6 +56,7 @@ public class Enemy extends Actor
             double dx = jugador.getX() - getX();  
             double dy = jugador.getY() - getY();  
             double angle = Math.atan2(dy,dx)*180.0/(Math.PI);
+            checkWalls();
             setRotation((int)angle);
             shotEnemy(jugador);
         }
@@ -145,5 +146,12 @@ public class Enemy extends Actor
             }
         }
 
+    }
+    
+    public void checkWalls(){
+        Wall wall = (Wall)getOneIntersectingObject(Wall.class);
+        if(wall!=null){
+            move(-1);
+        }
     }
 }

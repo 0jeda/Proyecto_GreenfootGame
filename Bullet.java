@@ -16,6 +16,7 @@ public class Bullet extends Item
     
     public void act()
     {
+        checkWalls();
         if(shooterType.equals("Player")){
             Enemy enemy=(Enemy)getOneIntersectingObject(Enemy.class);
             move(4);    
@@ -43,5 +44,12 @@ public class Bullet extends Item
     
     public String getShooterType(){
         return shooterType;
+    }
+    
+    public void checkWalls(){
+        Wall wall = (Wall)getOneIntersectingObject(Wall.class);
+        if(wall!=null){
+            setLocation(0, 0);
+        }
     }
 }
