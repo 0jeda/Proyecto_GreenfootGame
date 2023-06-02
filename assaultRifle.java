@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class assaultRifle extends Gun
+public class AssaultRifle extends Gun
 {
     private boolean flag1;
     private String shooterType;
@@ -14,7 +14,7 @@ public class assaultRifle extends Gun
     private int numberOfShot;
     private int delayBetweenShots;
 
-    assaultRifle(){
+    AssaultRifle(){
         ammunition=90;   
         deleyOfGun=150;
         flag=false;

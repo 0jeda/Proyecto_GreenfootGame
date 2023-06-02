@@ -31,7 +31,7 @@ public class Scenario1 extends World
      */
     private void prepare()
     {
-        addObject(new shotGun(),211,489);
+        addObject(new ShotGun(),211,489);
         addObject(new Enemy(), 680, 108);
         addObject(new Enemy(), 75, 131);
         addObject(new Enemy(), 908, 521);

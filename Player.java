@@ -10,7 +10,7 @@ public class Player extends Actor
 {
     private boolean holdingGun;
     private Gun currentGun;
-    private weaponMele currentMele;
+    private WeaponMele currentMele;
     private int OFFSET;
     private int numOfEscenario;
     private int score;
@@ -149,7 +149,7 @@ public class Player extends Actor
             }
         }
 
-        weaponMele mele = (weaponMele) getOneIntersectingObject(weaponMele.class);
+        WeaponMele mele = (WeaponMele) getOneIntersectingObject(WeaponMele.class);
         if (mele != null) {
             if (!holdingGun && Greenfoot.isKeyDown("space")) {
                 currentMele = mele; 
@@ -320,9 +320,9 @@ public class Player extends Actor
                 setImage("images/player_walk_1_PA.png");
             }
         }else{
-            shotGun shotgun = (shotGun)getOneIntersectingObject(shotGun.class);
-            assaultRifle rifle = (assaultRifle)getOneIntersectingObject(assaultRifle.class);
-            simpleGun simple = (simpleGun)getOneIntersectingObject(simpleGun.class);
+            ShotGun shotgun = (ShotGun)getOneIntersectingObject(ShotGun.class);
+            AssaultRifle rifle = (AssaultRifle)getOneIntersectingObject(AssaultRifle.class);
+            SimpleGun simple = (SimpleGun)getOneIntersectingObject(SimpleGun.class);
             if(shotgun != null){
                 setImage("images/player_shotgun_PA.png");
             }

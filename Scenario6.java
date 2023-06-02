@@ -86,7 +86,7 @@ public class Scenario6 extends World
         addObject(enemy3,460,543);
         Enemy enemy4 = new Enemy();
         addObject(enemy4,801,539);
-        simpleGun simpleGun = new simpleGun();
+        SimpleGun simpleGun = new SimpleGun();
         addObject(simpleGun,169,76);
         DoorWarp doorWarp = new DoorWarp();
         addObject(doorWarp,1065,83);

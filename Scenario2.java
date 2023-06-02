@@ -29,7 +29,7 @@ public class Scenario2 extends World
         addObject(new Enemy(),111,293);
         addObject(new Enemy(),46,57);
         //addObject(new Player(),27,493);
-        addObject(new simpleGun(),39,331);
+        addObject(new SimpleGun(),39,331);
         addObject(new SmallWall(),214,136);
         addObject(new LargeWall(),215,263);
         addObject(new LargeWallHorizontal(),117,399);
@@ -49,6 +49,6 @@ public class Scenario2 extends World
         addObject(new MediumWall(),953,444);
         addObject(new Enemy(),488,301);
         addObject(new Enemy(),1033,226);
-        addObject(new shotGun(),1043,515);
+        addObject(new ShotGun(),1043,515);
     }
 }

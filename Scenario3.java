@@ -38,7 +38,7 @@ public class Scenario3 extends World
         addObject(new Enemy(), 594, 206);
         addObject(new Enemy(), 789, 162);
         addObject(new Enemy(), 299, 502);
-        addObject(new assaultRifle(), 102, 364);
+        addObject(new AssaultRifle(), 102, 364);
         DoorWarp doorWarp = new DoorWarp();
         doorWarp.setRotation(180);
         addObject(doorWarp,3,540);

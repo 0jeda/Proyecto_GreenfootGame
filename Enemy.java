@@ -11,7 +11,7 @@ public class Enemy extends Actor
     private boolean hadGun;
     private String typeOfWeapon;
     private Gun gun;
-    private weaponMele mele;
+    private WeaponMele mele;
     private int counterShotGunDeley; 
     private boolean life;
     private int radius;
@@ -85,19 +85,19 @@ public class Enemy extends Actor
         Random rand = new Random();
         int randomNumber = rand.nextInt(4); 
         if (randomNumber == 0) {
-            gun = new shotGun();
+            gun = new ShotGun();
             typeOfWeapon="Gun";
             radius=250; 
         } else if (randomNumber == 1) {
-            gun = new simpleGun();
+            gun = new SimpleGun();
             typeOfWeapon="Gun";
             radius=300;
         } else if (randomNumber == 2) {
-            gun = new assaultRifle();
+            gun = new AssaultRifle();
             typeOfWeapon="Gun";
             radius=450;
         }else{
-            mele = new weaponMele();
+            mele = new WeaponMele();
             typeOfWeapon="Mele";
             radius=900;
         }

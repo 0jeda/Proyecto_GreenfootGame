@@ -6,9 +6,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class shotGun extends Gun
+public class ShotGun extends Gun
 {
-    shotGun(){
+    ShotGun(){
         ammunition=36;
         deleyOfGun=500;
     }

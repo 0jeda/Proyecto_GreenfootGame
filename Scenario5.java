@@ -80,7 +80,7 @@ public class Scenario5 extends World
         addObject(enemy2,417,534);
         Enemy enemy3 = new Enemy();
         addObject(enemy3,740,551);
-        shotGun shotGun = new shotGun();
+        ShotGun shotGun = new ShotGun();
         addObject(shotGun,115,560);
         Enemy enemy4 = new Enemy();
         addObject(enemy4,413,77);

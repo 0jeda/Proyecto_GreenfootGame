@@ -39,7 +39,7 @@ public class Scenario4 extends World
         DoorWarp doorWarp = new DoorWarp();
         doorWarp.setRotation(270);
         addObject(doorWarp,174,10);
-        simpleGun simpleGun = new simpleGun();
+        SimpleGun simpleGun = new SimpleGun();
         addObject(simpleGun,802,544);
     }
 }
