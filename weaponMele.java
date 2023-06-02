@@ -14,6 +14,6 @@ public class weaponMele extends Item
      */
     public void act()
     {
-        // Add your action code here.
+        
     }
 }

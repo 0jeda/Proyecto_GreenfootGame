@@ -12,16 +12,16 @@ public class Gun extends Item
     protected int deleyOfGun;
     protected GreenfootSound shotSound;
     protected String path;
-    
+
     public void act()
     {
         rotation();
     }
-    
+
     public void shot(String shooterType){
-        
+
         if(ammunition>0){
-            
+
             Bullet bullet= new Bullet(shooterType);
             getWorld().addObject(bullet,getX(),getY());
             bullet.setRotation(getRotation());
@@ -29,11 +29,11 @@ public class Gun extends Item
         }
 
     }
-    
+
     public int getDeleyOfGun(){
         return deleyOfGun;
     }
-    
+
     public void rotation(){
         List<Player> jugadores= getNeighbours(50,true,Player.class);
         for(Player jugador:jugadores){
@@ -41,7 +41,10 @@ public class Gun extends Item
             double dy = jugador.getY() - getY();  
             double angle = Math.atan2(dy,dx)*180.0/(Math.PI);
             setRotation((int)angle);
-    }
+        }
     }
     
+    public int getAmmunition(){
+        return ammunition;
+    }
 }

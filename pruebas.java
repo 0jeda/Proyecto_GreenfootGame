@@ -46,6 +46,8 @@ public class pruebas extends World
         Enemy enemy2 = new Enemy();
         addObject(enemy2,799,535);
         enemy.setLocation(773,89);
+        weaponMele weaponMele = new weaponMele();
+        addObject(weaponMele,353,106);
     }
     
     

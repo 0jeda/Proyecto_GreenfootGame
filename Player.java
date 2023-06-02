@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.*;
 /**
  * Write a description of class player here.
  * 
@@ -10,6 +10,7 @@ public class Player extends Actor
 {
     private boolean holdingGun;
     private Gun currentGun;
+    private weaponMele currentMele;
     private int OFFSET;
     private int numOfEscenario;
     private int score;
@@ -19,9 +20,11 @@ public class Player extends Actor
     private String []images;
     private int playerDeley=30;
     private int playerImageIndex;
+    private int ammunition;
 
     public Player(){
         holdingGun=false;
+        ammunition=0;
         OFFSET=2;
         numOfEscenario=1;
         score=0;
@@ -42,12 +45,19 @@ public class Player extends Actor
     {
         MouseInfo mouse = Greenfoot.getMouseInfo();
         move();
-        takeGun();    
-        shotGun(mouse);
+        takeGun();   
+
+        if(holdingGun){
+            shotGun(mouse);            
+        }else{
+            hitEnemy(mouse);
+        }
         rotation(mouse);
         changeEscenario();
         showScore();
+        showAmmunition();
         movementAnimation();
+
 
         if(nameDeley>0){
             World world = getWorld();
@@ -76,7 +86,6 @@ public class Player extends Actor
             offsetY=OFFSET;
         }
         setLocation(getX()+offsetX,getY()+offsetY);
-
     }
 
     public void rotation(MouseInfo mouse){
@@ -91,19 +100,32 @@ public class Player extends Actor
     public void takeGun() {
         Gun gun = (Gun) getOneIntersectingObject(Gun.class);
         if (gun != null) {
-            if (!holdingGun && Greenfoot.isKeyDown("space")) {
+            if (!holdingGun && Greenfoot.isKeyDown("space") && currentMele==null) {
                 holdingGun = true;
                 currentGun = gun; 
+                ammunition=currentGun.getAmmunition();
                 gun.getImage().setTransparency(0);
             }
         }
-
-        if (holdingGun == true) {
+        if (holdingGun && currentGun!=null) {
             currentGun.setLocation(getX(), getY());
             if (Greenfoot.isKeyDown("k")) {
                 holdingGun = false;
                 currentGun = null; 
                 gun.getImage().setTransparency(255);
+            }
+        }
+
+        weaponMele mele = (weaponMele) getOneIntersectingObject(weaponMele.class);
+        if (mele != null) {
+            if (!holdingGun && Greenfoot.isKeyDown("space")) {
+                currentMele = mele; 
+            }
+        }
+        if (currentMele!=null) {
+            currentMele.setLocation(getX(), getY());
+            if (Greenfoot.isKeyDown("k")) {
+                currentMele = null; 
             }
         }
     }
@@ -114,6 +136,7 @@ public class Player extends Actor
             int shots=mouse.getClickCount();
             if(0<shots){
                 currentGun.shot("Player");
+                ammunition=currentGun.getAmmunition();
             }
         }
     }
@@ -156,6 +179,35 @@ public class Player extends Actor
         World world = getWorld();
         world.showText("Score: "+score, 200,50);
     }
+    
+    public void showAmmunition(){
+        World world = getWorld();
+        world.showText("Munición: "+ammunition, 80,50);
+    }
+
+
+    public void hitEnemy(MouseInfo mouse){
+        if(mouse!=null){
+            int hits=mouse.getClickCount();
+            if(0<hits){
+                //setImage(golpeDerecho);
+                //setImage(golpeIzquierdo):
+                if(currentMele==null){
+                    List<Enemy> enemigos= getNeighbours(110,true,Enemy.class);
+                    for(Enemy enemigo:enemigos){
+                        enemigo.setStatus("Stunned");
+                    }
+                }else if(currentMele!=null){
+                    List<Enemy> enemigos= getNeighbours(150,true,Enemy.class);
+                    for(Enemy enemigo:enemigos){
+                        enemigo.setStatus("Dead");
+                    }
+                }
+            }
+        }
+    }
+
+
 
     public void movementAnimation(){
         if(holdingGun==false){

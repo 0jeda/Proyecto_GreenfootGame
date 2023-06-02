@@ -9,4 +9,6 @@ comment3.params=
 comment3.target=int\ getDeleyOfGun()
 comment4.params=
 comment4.target=void\ rotation()
-numComments=5
+comment5.params=
+comment5.target=int\ getAmmunition()
+numComments=6
